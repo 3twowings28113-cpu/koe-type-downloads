@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>koe-type（コエタイプ）| 声で文字入力</title>
+<meta name="description" content="喋るだけで文字入力。ずっと無料で、音声はPCの外に出ません。">
+<style>
+  body { font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; margin: 0; background: #f4f6fb; color: #1c2440; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 32px 20px 56px; }
+  h1 { font-size: 44px; margin: 8px 0 2px; letter-spacing: .02em; }
+  .ruby { color: #5a6480; font-size: 16px; margin: 0 0 6px; }
+  .catch { font-size: 22px; font-weight: bold; margin: 10px 0 4px; }
+  .sub { color: #46506e; margin: 0 0 22px; line-height: 1.7; }
+  .badges { margin: 0 0 26px; }
+  .badge { display: inline-block; background: #242460; color: #fff; border-radius: 999px; padding: 6px 14px; font-size: 14px; margin: 0 8px 8px 0; }
+  .badge.red { background: #c0392b; }
+  .dl { display: block; background: #2f6fed; color: #fff; text-decoration: none; text-align: center;
+        font-size: 26px; font-weight: bold; padding: 22px 16px; border-radius: 16px;
+        box-shadow: 0 6px 18px rgba(47,111,237,.35); }
+  .dl small { display: block; font-size: 14px; font-weight: normal; margin-top: 8px; opacity: .92; }
+  .dl:active { transform: translateY(1px); }
+  .alt { text-align: center; margin: 14px 0 6px; color: #46506e; font-size: 15px; }
+  .alt a { color: #2f6fed; }
+  .phone-note { display: none; background: #fff3cd; border: 1px solid #e6cf7a; border-radius: 12px;
+        padding: 14px 16px; margin: 0 0 20px; line-height: 1.7; font-size: 15px; }
+  .copybtn { background: #242460; color: #fff; border: 0; border-radius: 8px; padding: 8px 14px; font-size: 14px; cursor: pointer; }
+  h2 { font-size: 20px; margin: 34px 0 10px; }
+  ol.steps { line-height: 2.0; font-size: 16px; padding-left: 22px; margin: 0; }
+  img.shot { width: 100%; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,.12); margin-top: 8px; }
+  footer { color: #8a93ad; font-size: 13px; text-align: center; margin-top: 40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>koe-type</h1>
+  <p class="ruby">コエタイプ</p>
+  <p class="catch">声で、文字入力。キーボードを打つ代わりに、喋るだけ。</p>
+  <p class="sub">喋った内容が、カーソルの場所にそのまま文章として入ります。Word でも LINE でもブラウザでも使えます。</p>
+
+  <div class="badges">
+    <span class="badge red">ずっと無料</span>
+    <span class="badge">精度が高い</span>
+    <span class="badge">音声は PC の外に出ません</span>
+  </div>
+
+  <div class="phone-note" id="phoneNote">
+    スマホで開いている人は、このページのリンクを <b>パソコンで</b> 開いてダウンロードしてね。<br>
+    <button class="copybtn" id="copyBtn">このページのリンクをコピー</button>
+  </div>
+
+  <a class="dl" id="mainDl" href="https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-windows.zip">
+    ⬇ Windows 版をダウンロード
+    <small>無料 ・ Windows 10 / 11 対応 ・ 約 1.2MB</small>
+  </a>
+  <p class="alt" id="altLine">Mac の方は <a id="altDl" href="https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-mac-lite.zip">Mac 版 Lite（Apple Silicon 専用）</a></p>
+
+  <h2>入れ方（3ステップ）</h2>
+  <ol class="steps">
+    <li>落とした zip を右クリック →「すべて展開」</li>
+    <li>出てきたフォルダの中の「setup.cmd」をダブルクリック</li>
+    <li>あとは画面の案内どおりに（モデルは自動で入ります）</li>
+  </ol>
+
+  <h2>できること</h2>
+  <img class="shot" src="koetype.png" alt="koe-type の機能まとめ">
+
+  <footer>開発：山下 翼 ・ MIT License</footer>
+</div>
+<script>
+  (function () {
+    var ua = navigator.userAgent || "";
+    var isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
+    if (isMobile) document.getElementById("phoneNote").style.display = "block";
+    var isMac = /Macintosh|Mac OS X/i.test(ua) && !isMobile;
+    if (isMac) {
+      var main = document.getElementById("mainDl");
+      main.href = "https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-mac-lite.zip";
+      main.innerHTML = "⬇ Mac 版 Lite をダウンロード<small>無料 ・ Apple Silicon（M1 以降）専用</small>";
+      var alt = document.getElementById("altDl");
+      alt.href = "https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-windows.zip";
+      alt.textContent = "Windows 版";
+      document.getElementById("altLine").firstChild.textContent = "Windows の方は ";
+    }
+    document.getElementById("copyBtn").addEventListener("click", function () {
+      var url = location.href;
+      if (navigator.clipboard) navigator.clipboard.writeText(url);
+      this.textContent = "コピーしました";
+    });
+  })();
+</script>
+</body>
+</html>
