@@ -53,10 +53,10 @@
     ⬇ Windows 版をダウンロード
     <small>無料 ・ Windows 10 / 11 対応 ・ 約 1.2GB（モデル入り）</small>
   </a>
-  <p class="alt" id="altLine">Mac の方は <a id="altDl" href="https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-mac-lite.zip">Mac 版 Lite（Apple Silicon 専用）</a></p>
+  <p class="alt" id="altLine">Mac の方は <a id="altDl" href="https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-mac-lite.zip">Mac 版 Lite（Apple Silicon 専用・モデル入り）</a></p>
 
   <h2>入れ方（3ステップ）</h2>
-  <ol class="steps">
+  <ol class="steps" id="stepsList">
     <li>落とした zip を右クリック →「すべて展開」</li>
     <li>出てきたフォルダの中の「setup.cmd」をダブルクリック</li>
     <li>あとは画面の案内どおりに進むだけ（モデル入りで追加ダウンロードなし）</li>
@@ -76,11 +76,15 @@
     if (isMac) {
       var main = document.getElementById("mainDl");
       main.href = "https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-mac-lite.zip";
-      main.innerHTML = "⬇ Mac 版 Lite をダウンロード<small>無料 ・ Apple Silicon（M1 以降）専用</small>";
+      main.innerHTML = "⬇ Mac 版 Lite をダウンロード<small>無料 ・ Apple Silicon（M1 以降）専用 ・ 約 680MB（モデル入り）</small>";
       var alt = document.getElementById("altDl");
       alt.href = "https://github.com/3twowings28113-cpu/koe-type-downloads/releases/latest/download/koe-type-windows.zip";
       alt.textContent = "Windows 版";
       document.getElementById("altLine").firstChild.textContent = "Windows の方は ";
+      document.getElementById("stepsList").innerHTML =
+        "<li>落とした zip をダブルクリックで展開</li>" +
+        "<li>出てきたフォルダの中の「setup.command」をダブルクリック</li>" +
+        "<li>あとは画面の番号案内どおりに進むだけ（モデル入りで追加ダウンロードなし。途中で許可を聞かれたら、案内のとおりにオンにしてね）</li>";
     }
     document.getElementById("copyBtn").addEventListener("click", function () {
       var url = location.href;
